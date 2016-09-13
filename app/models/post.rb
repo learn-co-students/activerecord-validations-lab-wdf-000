@@ -10,30 +10,25 @@ class Post < ActiveRecord::Base
   validate :clickbaity
 
 
+  #
+#   def clickbaity
+#     bait_word = ["Won't Believe", "Secret", "Top", "Guess"].find do |bait|
+#       title.match(bait) unless title.nil?
+#     end
+# binding.
+#     if !bait_word
+#       errors.add(:title, "not clickbaity enough")
+#     end
+#   end
 
-  def clickbaity
-    bait_word = ["Won't Believe", "Secret", "Top", "Guess"].find do |bait|
-      title.match(bait) unless title.nil?
+
+    def clickbaity
+      if title.nil? || !(title.include?("Won't Believe") || title.include?("Secret") || title.include?("Top") || title.include?("Guess"))
+        errors.add(:title, "not clickbaity enough")
+      end
     end
 
-    if !bait_word
-      errors.add(:title, "not clickbaity enough")
-    end
-  end
 
-
-  # validates_with MyValidator
-
-  # validates :title, inclusion: { in: %w(Secret Guess)}
-
-    # def clickbaity
-    #   if title.include?("Won't Believe")
-    #     # || !title.include?("Secret") || !title.include?("Top") || !title.include?("Guess")
-    #     errors.add(:title, "not clickbaity enough")
-    #   end
-    # end
-    #
-    #
 
 end
 
